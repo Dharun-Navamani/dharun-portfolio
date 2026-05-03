@@ -22,7 +22,13 @@ async function loadContent() {
         const resumeBtn = document.getElementById('downloadResume');
         if (resumeBtn && data.resume_url) {
             resumeBtn.href = data.resume_url;
-            resumeBtn.setAttribute('download', 'Dharun_N_Resume');
+            resumeBtn.target = "_blank";
+            // Ensure the link is treated as a download
+            const fileName = data.resume_url.split('/').pop();
+            resumeBtn.setAttribute('download', fileName || 'Dharun_N_Resume');
+        } else if (resumeBtn) {
+            // If no resume is uploaded yet, we can show a tooltip or just leave it
+            resumeBtn.title = "Please upload a resume in the admin panel";
         }
     } catch (e) { console.error("Error loading resume:", e); }
 
