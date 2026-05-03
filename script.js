@@ -21,14 +21,24 @@ async function loadContent() {
     try {
         const resumeBtn = document.getElementById('downloadResume');
         if (resumeBtn && data.resume_url) {
-            resumeBtn.href = data.resume_url;
-            resumeBtn.target = "_blank";
-            // Ensure the link is treated as a download
-            const fileName = data.resume_url.split('/').pop();
-            resumeBtn.setAttribute('download', fileName || 'Dharun_N_Resume');
+            // Ensure path is correct (remove leading slash if needed for some environments)
+            const cleanPath = data.resume_url.startsWith('/') ? data.resume_url : `/${data.resume_url}`;
+            resumeBtn.href = cleanPath;
+            resumeBtn.setAttribute('target', '_blank');
+            resumeBtn.setAttribute('rel', 'noopener noreferrer');
+            
+            // Force download if possible
+            const fileName = cleanPath.split('/').pop();
+            resumeBtn.setAttribute('download', fileName);
+            
+            console.log("Resume link loaded:", cleanPath);
         } else if (resumeBtn) {
-            // If no resume is uploaded yet, we can show a tooltip or just leave it
-            resumeBtn.title = "Please upload a resume in the admin panel";
+            resumeBtn.addEventListener('click', (e) => {
+                if (!resumeBtn.href || resumeBtn.href.endsWith('#')) {
+                    e.preventDefault();
+                    alert("Please upload your resume in the Admin Panel first!");
+                }
+            });
         }
     } catch (e) { console.error("Error loading resume:", e); }
 
