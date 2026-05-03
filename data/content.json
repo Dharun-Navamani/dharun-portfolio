@@ -18,45 +18,105 @@
     {
       "title": "Gas Sensor Detector",
       "description": "A system designed to detect harmful gases in the environment and alert users in real-time for safety and prevention.",
-      "tags": ["IoT", "Sensors", "Arduino"],
+      "tags": [
+        "IoT",
+        "Sensors",
+        "Arduino"
+      ],
       "link": "#"
     },
     {
       "title": "Smart Accident Notification",
       "description": "Automatically sends alerts during vehicle accidents using sensors and GPS, enabling faster emergency response.",
-      "tags": ["ESP8266", "GPS", "Sensors"],
+      "tags": [
+        "ESP8266",
+        "GPS",
+        "Sensors"
+      ],
       "link": "#"
     },
     {
       "title": "Wireless Water Bottle",
       "description": "Smart hydration tracking system that monitors water intake wirelessly and reminds users to stay hydrated.",
-      "tags": ["IoT", "Wireless", "Health"],
+      "tags": [
+        "IoT",
+        "Wireless",
+        "Health"
+      ],
       "link": "#"
     },
     {
       "title": "Smart Security System",
       "description": "IoT-based home security solution with real-time monitoring, motion detection, and instant mobile alerts.",
-      "tags": ["IoT", "Security", "Cloud"],
+      "tags": [
+        "IoT",
+        "Security",
+        "Cloud"
+      ],
       "link": "#"
     },
     {
       "title": "Irrigation Water Quality Monitor",
       "description": "Uses TDS sensor, ESP8266, and cloud storage to monitor irrigation water quality in real-time for agriculture.",
-      "tags": ["ESP8266", "TDS Sensor", "Cloud"],
+      "tags": [
+        "ESP8266",
+        "TDS Sensor",
+        "Cloud"
+      ],
       "link": "#"
     }
   ],
   "skills": [
-    { "name": "HTML", "icon": "fab fa-html5", "level": 90 },
-    { "name": "CSS", "icon": "fab fa-css3-alt", "level": 85 },
-    { "name": "JavaScript", "icon": "fab fa-js-square", "level": 75 },
-    { "name": "PCB Design", "icon": "fas fa-microchip", "level": 80 },
-    { "name": "C / C++", "icon": "fas fa-code", "level": 85 },
-    { "name": "Java (Basic)", "icon": "fab fa-java", "level": 60 },
-    { "name": "IoT Development", "icon": "fas fa-wifi", "level": 90 },
-    { "name": "Embedded Systems", "icon": "fas fa-cogs", "level": 85 },
-    { "name": "Problem Solving", "icon": "fas fa-brain", "level": 80 },
-    { "name": "Leadership", "icon": "fas fa-users", "level": 85 }
+    {
+      "name": "HTML",
+      "icon": "fab fa-html5",
+      "level": 90
+    },
+    {
+      "name": "CSS",
+      "icon": "fab fa-css3-alt",
+      "level": 85
+    },
+    {
+      "name": "JavaScript",
+      "icon": "fab fa-js-square",
+      "level": 75
+    },
+    {
+      "name": "PCB Design",
+      "icon": "fas fa-microchip",
+      "level": 80
+    },
+    {
+      "name": "C / C++",
+      "icon": "fas fa-code",
+      "level": 85
+    },
+    {
+      "name": "Java (Basic)",
+      "icon": "fab fa-java",
+      "level": 60
+    },
+    {
+      "name": "IoT Development",
+      "icon": "fas fa-wifi",
+      "level": 90
+    },
+    {
+      "name": "Embedded Systems",
+      "icon": "fas fa-cogs",
+      "level": 85
+    },
+    {
+      "name": "Problem Solving",
+      "icon": "fas fa-brain",
+      "level": 80
+    },
+    {
+      "name": "Leadership",
+      "icon": "fas fa-users",
+      "level": 85
+    }
   ],
   "achievements": [
     {
