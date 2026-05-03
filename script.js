@@ -88,6 +88,45 @@ async function loadContent() {
       `).join('');
     }
 
+    // Load Contact & Socials
+    if (data.contact) {
+      // Hero Socials
+      const heroEmail = document.getElementById('hero-email');
+      const heroPhone = document.getElementById('hero-phone');
+      const heroLinkedin = document.getElementById('hero-linkedin');
+      const heroWhatsapp = document.getElementById('hero-whatsapp');
+
+      if (heroEmail) heroEmail.href = `mailto:${data.contact.email}`;
+      if (heroPhone) heroPhone.href = `tel:${data.contact.phone}`;
+      if (heroLinkedin) heroLinkedin.href = data.contact.linkedin;
+      if (heroWhatsapp) heroWhatsapp.href = `https://wa.me/${data.contact.whatsapp}`;
+
+      // Contact Section
+      const contactEmail = document.getElementById('contact-email');
+      const contactPhone = document.getElementById('contact-phone');
+      const contactLinkedin = document.getElementById('contact-linkedin');
+      const contactWhatsapp = document.getElementById('contact-whatsapp');
+
+      if (contactEmail) {
+        contactEmail.href = `mailto:${data.contact.email}`;
+        contactEmail.innerText = data.contact.email;
+      }
+      if (contactPhone) {
+        contactPhone.href = `tel:${data.contact.phone}`;
+        contactPhone.innerText = data.contact.phone;
+      }
+      if (contactLinkedin) {
+        contactLinkedin.href = data.contact.linkedin;
+        // Extract username from LinkedIn URL if possible
+        const linkedinUser = data.contact.linkedin.split('/').filter(Boolean).pop();
+        contactLinkedin.innerText = linkedinUser || 'LinkedIn';
+      }
+      if (contactWhatsapp) {
+        contactWhatsapp.href = `https://wa.me/${data.contact.whatsapp}`;
+        contactWhatsapp.innerText = data.contact.phone; // Show readable phone number
+      }
+    }
+
     // Re-initialize observers for new elements
     initObservers();
 
