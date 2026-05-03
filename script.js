@@ -17,7 +17,16 @@ async function loadContent() {
         }
     } catch (e) { console.error("Error loading image:", e); }
 
-    // 2. Load Contact & Socials (Priority)
+    // 2. Load Resume
+    try {
+        const resumeBtn = document.getElementById('downloadResume');
+        if (resumeBtn && data.resume_url) {
+            resumeBtn.href = data.resume_url;
+            resumeBtn.setAttribute('download', 'Dharun_N_Resume');
+        }
+    } catch (e) { console.error("Error loading resume:", e); }
+
+    // 3. Load Contact & Socials (Priority)
     try {
         if (data.contact) {
             const heroEmail = document.getElementById('hero-email');

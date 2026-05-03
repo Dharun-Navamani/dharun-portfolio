@@ -17,6 +17,7 @@ collections:
         file: "data/content.json"
         fields:
           - { label: "Profile Image", name: "profile_image", widget: "image", required: false }
+          - { label: "Resume File", name: "resume_url", widget: "file", required: false }
           - { label: "Contact & Social", name: "contact", widget: "object", fields: [
               { label: "Email", name: "email", widget: "string" },
               { label: "WhatsApp Number", name: "whatsapp", widget: "string", hint: "Enter with country code, e.g., 919876543210" },
