@@ -1,0 +1,43 @@
+backend:
+  name: git-gateway
+  branch: main # Ensure this matches your GitHub branch
+
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+collections:
+  - name: "settings"
+    label: "Website Content"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "content"
+        label: "Main Content"
+        file: "data/content.json"
+        fields:
+          - { label: "Profile Image", name: "profile_image", widget: "image", required: false }
+          - { label: "About Me", name: "about", widget: "object", fields: [
+              { label: "Bio Paragraph 1", name: "bio1", widget: "text" },
+              { label: "Bio Paragraph 2", name: "bio2", widget: "text" },
+              { label: "Bio Paragraph 3", name: "bio3", widget: "text" },
+              { label: "Projects Count", name: "stat_projects", widget: "number" },
+              { label: "Awards Count", name: "stat_awards", widget: "number" },
+              { label: "Skills Count", name: "stat_skills", widget: "number" }
+            ]}
+          - { label: "Projects", name: "projects", widget: "list", fields: [
+              { label: "Title", name: "title", widget: "string" },
+              { label: "Description", name: "description", widget: "text" },
+              { label: "Tags (comma separated)", name: "tags", widget: "list" },
+              { label: "Link", name: "link", widget: "string", required: false }
+            ]}
+          - { label: "Skills", name: "skills", widget: "list", fields: [
+              { label: "Skill Name", name: "name", widget: "string" },
+              { label: "Icon Class (e.g., fab fa-html5)", name: "icon", widget: "string" },
+              { label: "Percentage", name: "level", widget: "number" }
+            ]}
+          - { label: "Achievements", name: "achievements", widget: "list", fields: [
+              { label: "Title", name: "title", widget: "string" },
+              { label: "Description", name: "text", widget: "text" },
+              { label: "Badge Emoji", name: "badge", widget: "string" }
+            ]}
