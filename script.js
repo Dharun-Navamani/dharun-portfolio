@@ -306,9 +306,14 @@ document.getElementById('contactForm').addEventListener('submit', (e) => {
 // ===== Smooth scroll for all anchor links =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', (e) => {
-    e.preventDefault();
-    const target = document.querySelector(anchor.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
+    const href = anchor.getAttribute('href');
+    
+    // Only smooth scroll if it's a valid section ID (not just '#' and not a download link)
+    if (href.length > 1 && document.querySelector(href)) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+    }
   });
 });
 
