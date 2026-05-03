@@ -34,6 +34,7 @@ collections:
             ]}
           - { label: "Projects", name: "projects", widget: "list", fields: [
               { label: "Title", name: "title", widget: "string" },
+              { label: "Project Image", name: "image", widget: "image", required: false },
               { label: "Description", name: "description", widget: "text" },
               { label: "Tags (comma separated)", name: "tags", widget: "list" },
               { label: "Link", name: "link", widget: "string", required: false }
@@ -45,6 +46,7 @@ collections:
             ]}
           - { label: "Achievements", name: "achievements", widget: "list", fields: [
               { label: "Title", name: "title", widget: "string" },
+              { label: "Achievement Image", name: "image", widget: "image", required: false },
               { label: "Description", name: "text", widget: "text" },
               { label: "Badge Emoji", name: "badge", widget: "string" }
             ]}

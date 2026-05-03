@@ -115,16 +115,23 @@ async function loadContent() {
         if (projectsContainer && data.projects) {
           projectsContainer.innerHTML = data.projects.map(project => `
             <div class="project-card animate-on-scroll">
-                <div class="project-header">
-                    <i class="fas fa-folder-open project-folder"></i>
-                    <div class="project-links">
-                        <a href="${project.link}" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
+                <div class="project-image-container">
+                    ${project.image 
+                        ? `<img src="${project.image}" alt="${project.title}">` 
+                        : `<div class="project-image-placeholder"><i class="fas fa-code"></i></div>`}
                 </div>
-                <h3 class="project-title">${project.title}</h3>
-                <p class="project-desc">${project.description}</p>
-                <div class="project-tags">
-                    ${Array.isArray(project.tags) ? project.tags.map(tag => `<span>${tag}</span>`).join('') : ''}
+                <div class="project-card-content">
+                    <div class="project-header">
+                        <i class="fas fa-folder-open project-folder"></i>
+                        <div class="project-links">
+                            ${project.link ? `<a href="${project.link}" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i></a>` : ''}
+                        </div>
+                    </div>
+                    <h3 class="project-title">${project.title}</h3>
+                    <p class="project-desc">${project.description}</p>
+                    <div class="project-tags">
+                        ${Array.isArray(project.tags) ? project.tags.map(tag => `<span>${tag}</span>`).join('') : ''}
+                    </div>
                 </div>
             </div>
           `).join('');
@@ -138,7 +145,9 @@ async function loadContent() {
           achievementsContainer.innerHTML = data.achievements.map(achievement => `
             <div class="achievement-card animate-on-scroll">
                 <div class="achievement-icon">
-                    <i class="fas fa-award"></i>
+                    ${achievement.image 
+                        ? `<img src="${achievement.image}" alt="${achievement.title}">` 
+                        : `<i class="fas fa-award"></i>`}
                 </div>
                 <div class="achievement-content">
                     <h3>${achievement.title}</h3>
