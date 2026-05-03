@@ -21,24 +21,20 @@ async function loadContent() {
     try {
         const resumeBtn = document.getElementById('downloadResume');
         if (resumeBtn && data.resume_url) {
-            // Ensure path is correct (remove leading slash if needed for some environments)
-            const cleanPath = data.resume_url.startsWith('/') ? data.resume_url : `/${data.resume_url}`;
+            // Absolute path check
+            let cleanPath = data.resume_url;
+            if (!cleanPath.startsWith('http') && !cleanPath.startsWith('/')) {
+                cleanPath = '/' + cleanPath;
+            }
+            
             resumeBtn.href = cleanPath;
             resumeBtn.setAttribute('target', '_blank');
-            resumeBtn.setAttribute('rel', 'noopener noreferrer');
+            resumeBtn.setAttribute('download', ''); // Suggest download
             
-            // Force download if possible
-            const fileName = cleanPath.split('/').pop();
-            resumeBtn.setAttribute('download', fileName);
-            
-            console.log("Resume link loaded:", cleanPath);
-        } else if (resumeBtn) {
-            resumeBtn.addEventListener('click', (e) => {
-                if (!resumeBtn.href || resumeBtn.href.endsWith('#')) {
-                    e.preventDefault();
-                    alert("Please upload your resume in the Admin Panel first!");
-                }
-            });
+            // Backup: If click doesn't work, try opening directly
+            resumeBtn.onclick = (e) => {
+                console.log("Downloading from:", cleanPath);
+            };
         }
     } catch (e) { console.error("Error loading resume:", e); }
 
