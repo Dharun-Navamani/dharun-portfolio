@@ -4,134 +4,135 @@ async function loadContent() {
     const response = await fetch('data/content.json');
     const data = await response.json();
 
-    // Load About Image
-    const imageContainer = document.getElementById('about-image-container');
-    if (imageContainer && data.profile_image) {
-      imageContainer.innerHTML = `
-        <div class="image-wrapper">
-            <img src="${data.profile_image}" alt="Dharun N" class="profile-img">
-            <div class="image-border"></div>
-        </div>
-      `;
-    }
-
-    // Load About Section
-    const aboutContainer = document.getElementById('about-container');
-    if (aboutContainer) {
-      aboutContainer.innerHTML = `
-        <p>${data.about.bio1}</p>
-        <p>${data.about.bio2}</p>
-        <p>${data.about.bio3}</p>
-        <div class="about-stats">
-            <div class="stat-item">
-                <span class="stat-number" data-count="${data.about.stat_projects}">0</span>
-                <span class="stat-label">Projects</span>
+    // 1. Load Profile Image
+    try {
+        const imageContainer = document.getElementById('about-image-container');
+        if (imageContainer && data.profile_image) {
+          imageContainer.innerHTML = `
+            <div class="image-wrapper">
+                <img src="${data.profile_image}" alt="Dharun N" class="profile-img">
+                <div class="image-border"></div>
             </div>
-            <div class="stat-item">
-                <span class="stat-number" data-count="${data.about.stat_awards}">0</span>
-                <span class="stat-label">Awards</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number" data-count="${data.about.stat_skills}">0</span>
-                <span class="stat-label">Skills</span>
-            </div>
-        </div>
-      `;
-    }
+          `;
+        }
+    } catch (e) { console.error("Error loading image:", e); }
 
-    // Load Skills
-    const skillsContainer = document.getElementById('skills-container');
-    if (skillsContainer) {
-      skillsContainer.innerHTML = data.skills.map(skill => `
-        <div class="skill-card animate-on-scroll" data-skill="${skill.level}">
-            <div class="skill-icon"><i class="${skill.icon}"></i></div>
-            <h3>${skill.name}</h3>
-            <div class="skill-bar"><div class="skill-fill" data-width="${skill.level}"></div></div>
-        </div>
-      `).join('');
-    }
+    // 2. Load Contact & Socials (Priority)
+    try {
+        if (data.contact) {
+            const heroEmail = document.getElementById('hero-email');
+            const heroPhone = document.getElementById('hero-phone');
+            const heroLinkedin = document.getElementById('hero-linkedin');
+            const heroWhatsapp = document.getElementById('hero-whatsapp');
 
-    // Load Projects
-    const projectsContainer = document.getElementById('projects-container');
-    if (projectsContainer) {
-      projectsContainer.innerHTML = data.projects.map(project => `
-        <div class="project-card animate-on-scroll">
-            <div class="project-header">
-                <i class="fas fa-folder-open project-folder"></i>
-                <div class="project-links">
-                    <a href="${project.link}" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i></a>
+            const waLink = `https://wa.me/${data.contact.whatsapp.replace(/\D/g,'')}`;
+
+            if (heroEmail) heroEmail.href = `mailto:${data.contact.email}`;
+            if (heroPhone) heroPhone.href = `tel:${data.contact.phone.replace(/\s/g,'')}`;
+            if (heroLinkedin) heroLinkedin.href = data.contact.linkedin;
+            if (heroWhatsapp) heroWhatsapp.href = waLink;
+
+            const contactEmail = document.getElementById('contact-email');
+            const contactPhone = document.getElementById('contact-phone');
+            const contactLinkedin = document.getElementById('contact-linkedin');
+            const contactWhatsapp = document.getElementById('contact-whatsapp');
+
+            if (contactEmail) { contactEmail.href = `mailto:${data.contact.email}`; contactEmail.innerText = data.contact.email; }
+            if (contactPhone) { contactPhone.href = `tel:${data.contact.phone.replace(/\s/g,'')}`; contactPhone.innerText = data.contact.phone; }
+            if (contactLinkedin) { 
+                contactLinkedin.href = data.contact.linkedin;
+                const linkedinUser = data.contact.linkedin.split('/').filter(Boolean).pop();
+                contactLinkedin.innerText = linkedinUser || 'LinkedIn';
+            }
+            if (contactWhatsapp) { contactWhatsapp.href = waLink; contactWhatsapp.innerText = data.contact.phone; }
+        }
+    } catch (e) { console.error("Error loading contacts:", e); }
+
+    // 3. Load About Section
+    try {
+        const aboutContainer = document.getElementById('about-container');
+        if (aboutContainer && data.about) {
+          aboutContainer.innerHTML = `
+            <p>${data.about.bio1}</p>
+            <p>${data.about.bio2}</p>
+            <p>${data.about.bio3}</p>
+            <div class="about-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="${data.about.stat_projects}">0</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="${data.about.stat_awards}">0</span>
+                    <span class="stat-label">Awards</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="${data.about.stat_skills}">0</span>
+                    <span class="stat-label">Skills</span>
                 </div>
             </div>
-            <h3 class="project-title">${project.title}</h3>
-            <p class="project-desc">${project.description}</p>
-            <div class="project-tags">
-                ${project.tags.map(tag => `<span>${tag}</span>`).join('')}
+          `;
+        }
+    } catch (e) { console.error("Error loading about:", e); }
+
+    // 4. Load Skills
+    try {
+        const skillsContainer = document.getElementById('skills-container');
+        if (skillsContainer && data.skills) {
+          skillsContainer.innerHTML = data.skills.map(skill => `
+            <div class="skill-card animate-on-scroll" data-skill="${skill.level}">
+                <div class="skill-icon"><i class="${skill.icon}"></i></div>
+                <h3>${skill.name}</h3>
+                <div class="skill-bar"><div class="skill-fill" data-width="${skill.level}"></div></div>
             </div>
-        </div>
-      `).join('');
-    }
+          `).join('');
+        }
+    } catch (e) { console.error("Error loading skills:", e); }
 
-    // Load Achievements
-    const achievementsContainer = document.getElementById('achievements-container');
-    if (achievementsContainer) {
-      achievementsContainer.innerHTML = data.achievements.map(achievement => `
-        <div class="achievement-card animate-on-scroll">
-            <div class="achievement-icon">
-                <i class="fas fa-award"></i>
+    // 5. Load Projects
+    try {
+        const projectsContainer = document.getElementById('projects-container');
+        if (projectsContainer && data.projects) {
+          projectsContainer.innerHTML = data.projects.map(project => `
+            <div class="project-card animate-on-scroll">
+                <div class="project-header">
+                    <i class="fas fa-folder-open project-folder"></i>
+                    <div class="project-links">
+                        <a href="${project.link}" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+                <h3 class="project-title">${project.title}</h3>
+                <p class="project-desc">${project.description}</p>
+                <div class="project-tags">
+                    ${Array.isArray(project.tags) ? project.tags.map(tag => `<span>${tag}</span>`).join('') : ''}
+                </div>
             </div>
-            <div class="achievement-content">
-                <h3>${achievement.title}</h3>
-                <p>${achievement.text}</p>
+          `).join('');
+        }
+    } catch (e) { console.error("Error loading projects:", e); }
+
+    // 6. Load Achievements
+    try {
+        const achievementsContainer = document.getElementById('achievements-container');
+        if (achievementsContainer && data.achievements) {
+          achievementsContainer.innerHTML = data.achievements.map(achievement => `
+            <div class="achievement-card animate-on-scroll">
+                <div class="achievement-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <div class="achievement-content">
+                    <h3>${achievement.title}</h3>
+                    <p>${achievement.text}</p>
+                </div>
+                <div class="achievement-badge">${achievement.badge}</div>
             </div>
-            <div class="achievement-badge">${achievement.badge}</div>
-        </div>
-      `).join('');
-    }
+          `).join('');
+        }
+    } catch (e) { console.error("Error loading achievements:", e); }
 
-    // Load Contact & Socials
-    if (data.contact) {
-      // Hero Socials
-      const heroEmail = document.getElementById('hero-email');
-      const heroPhone = document.getElementById('hero-phone');
-      const heroLinkedin = document.getElementById('hero-linkedin');
-      const heroWhatsapp = document.getElementById('hero-whatsapp');
-
-      if (heroEmail) heroEmail.href = `mailto:${data.contact.email}`;
-      if (heroPhone) heroPhone.href = `tel:${data.contact.phone}`;
-      if (heroLinkedin) heroLinkedin.href = data.contact.linkedin;
-      if (heroWhatsapp) heroWhatsapp.href = `https://wa.me/${data.contact.whatsapp}`;
-
-      // Contact Section
-      const contactEmail = document.getElementById('contact-email');
-      const contactPhone = document.getElementById('contact-phone');
-      const contactLinkedin = document.getElementById('contact-linkedin');
-      const contactWhatsapp = document.getElementById('contact-whatsapp');
-
-      if (contactEmail) {
-        contactEmail.href = `mailto:${data.contact.email}`;
-        contactEmail.innerText = data.contact.email;
-      }
-      if (contactPhone) {
-        contactPhone.href = `tel:${data.contact.phone}`;
-        contactPhone.innerText = data.contact.phone;
-      }
-      if (contactLinkedin) {
-        contactLinkedin.href = data.contact.linkedin;
-        // Extract username from LinkedIn URL if possible
-        const linkedinUser = data.contact.linkedin.split('/').filter(Boolean).pop();
-        contactLinkedin.innerText = linkedinUser || 'LinkedIn';
-      }
-      if (contactWhatsapp) {
-        contactWhatsapp.href = `https://wa.me/${data.contact.whatsapp}`;
-        contactWhatsapp.innerText = data.contact.phone; // Show readable phone number
-      }
-    }
-
-    // Re-initialize observers for new elements
     initObservers();
 
   } catch (error) {
-    console.error('Error loading content:', error);
+    console.error('Critical error loading content:', error);
   }
 }
 
