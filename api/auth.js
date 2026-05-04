@@ -14,7 +14,7 @@ const client = new AuthorizationCode({
 
 module.exports = async (req, res) => {
   const authorizationUri = client.authorizeURL({
-    scope: 'repo,user',
+    scope: 'repo user',
     state: Math.random().toString(36).substring(2),
   });
 
