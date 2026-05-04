@@ -1,7 +1,9 @@
 backend:
   name: github
-  repo: Dharun-Navamani/dharun-portfolio # Your GitHub username/repo name
+  repo: Dharun-Navamani/dharun-portfolio
   branch: main
+  base_url: https://dharun-portfolio-lilac.vercel.app
+  auth_endpoint: auth
 
 media_folder: "assets/images"
 public_folder: "/assets/images"
