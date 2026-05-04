@@ -300,16 +300,44 @@ document.addEventListener('mousemove', (e) => {
 });
 
 // ===== Contact Form =====
-document.getElementById('contactForm').addEventListener('submit', (e) => {
+document.getElementById('contactForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const btn = e.target.querySelector('button');
-  btn.innerHTML = '<span>Message Sent!</span> <i class="fas fa-check"></i>';
-  btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-  setTimeout(() => {
-    btn.innerHTML = '<span>Send Message</span> <i class="fas fa-paper-plane"></i>';
-    btn.style.background = '';
-    e.target.reset();
-  }, 3000);
+  const form = e.target;
+  const btn = form.querySelector('button');
+  const originalBtnContent = btn.innerHTML;
+  
+  // Disable button and show loading state
+  btn.disabled = true;
+  btn.innerHTML = '<span>Sending...</span> <i class="fas fa-spinner fa-spin"></i>';
+
+  try {
+    const formData = new FormData(form);
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      btn.innerHTML = '<span>Message Sent!</span> <i class="fas fa-check"></i>';
+      btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+      form.reset();
+    } else {
+      throw new Error('Form submission failed');
+    }
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    btn.innerHTML = '<span>Error! Try again.</span> <i class="fas fa-exclamation-triangle"></i>';
+    btn.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+  } finally {
+    setTimeout(() => {
+      btn.innerHTML = originalBtnContent;
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 4000);
+  }
 });
 
 // ===== Smooth scroll for all anchor links =====

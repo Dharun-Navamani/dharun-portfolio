@@ -1,6 +1,7 @@
 backend:
-  name: git-gateway
-  branch: main # Ensure this matches your GitHub branch
+  name: github
+  repo: Dharun-Navamani/dharun-portfolio # Your GitHub username/repo name
+  branch: main
 
 media_folder: "assets/images"
 public_folder: "/assets/images"
