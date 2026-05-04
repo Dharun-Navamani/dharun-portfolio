@@ -14,7 +14,6 @@ const client = new AuthorizationCode({
 
 module.exports = async (req, res) => {
   const authorizationUri = client.authorizeURL({
-    redirect_uri: `https://${req.headers.host}/callback`,
     scope: 'repo,user',
     state: Math.random().toString(36).substring(2),
   });

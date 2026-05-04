@@ -18,7 +18,6 @@ module.exports = async (req, res) => {
   try {
     const accessToken = await client.getToken({
       code,
-      redirect_uri: `https://${req.headers.host}/callback`,
     });
 
     const token = accessToken.token.access_token;
