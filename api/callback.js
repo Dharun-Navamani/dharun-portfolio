@@ -2,7 +2,7 @@ const { AuthorizationCode } = require('simple-oauth2');
 
 const client = new AuthorizationCode({
   client: {
-    id: 'Ov23lij7I1DC5dk67C38',
+    id: 'Ov23lij7IlDC5dk67C38',
     secret: process.env.OAUTH_CLIENT_SECRET,
   },
   auth: {
