@@ -2,7 +2,5 @@
   "name": "dharun-portfolio",
   "version": "1.0.0",
   "description": "Personal Portfolio",
-  "dependencies": {
-    "simple-oauth2": "^5.0.0"
-  }
+  "dependencies": {}
 }
