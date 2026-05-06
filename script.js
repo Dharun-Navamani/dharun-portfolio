@@ -20,21 +20,21 @@ async function loadContent() {
     // 2. Load Resume
     try {
         const resumeBtn = document.getElementById('downloadResume');
-        if (resumeBtn && data.resume_url) {
-            // Absolute path check
-            let cleanPath = data.resume_url;
-            if (!cleanPath.startsWith('http') && !cleanPath.startsWith('/')) {
-                cleanPath = '/' + cleanPath;
+        if (resumeBtn) {
+            if (data.resume_url) {
+                // Absolute path check
+                let cleanPath = data.resume_url;
+                if (!cleanPath.startsWith('http') && !cleanPath.startsWith('/')) {
+                    cleanPath = '/' + cleanPath;
+                }
+                
+                resumeBtn.href = cleanPath;
+                resumeBtn.setAttribute('target', '_blank');
+                resumeBtn.setAttribute('download', ''); // Suggest download
+                resumeBtn.style.display = 'inline-flex'; // Ensure visible
+            } else {
+                resumeBtn.style.display = 'none'; // Hide if no data
             }
-            
-            resumeBtn.href = cleanPath;
-            resumeBtn.setAttribute('target', '_blank');
-            resumeBtn.setAttribute('download', ''); // Suggest download
-            
-            // Backup: If click doesn't work, try opening directly
-            resumeBtn.onclick = (e) => {
-                console.log("Downloading from:", cleanPath);
-            };
         }
     } catch (e) { console.error("Error loading resume:", e); }
 
