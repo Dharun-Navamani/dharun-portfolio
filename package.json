@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Personal Portfolio",
   "dependencies": {
+    "@vercel/speed-insights": "^2.0.0",
     "simple-oauth2": "^5.0.0"
   }
 }
