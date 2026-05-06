@@ -1,7 +1,7 @@
 // ===== Dynamic Content Loading =====
 async function loadContent() {
   try {
-    const response = await fetch('data/content.json');
+    const response = await fetch('/api/get-content');
     const data = await response.json();
 
     // 1. Load Profile Image
