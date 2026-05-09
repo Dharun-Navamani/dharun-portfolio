@@ -1,8 +1,26 @@
 // ===== Dynamic Content Loading =====
 async function loadContent() {
+  // 0. Initialize observers immediately so static content can appear
+  initObservers();
+
   try {
     const response = await fetch('/api/get-content');
+    
+    // Check if response is okay and is JSON
+    if (!response.ok) {
+        throw new Error(`Server returned ${response.status}`);
+    }
+    
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Server did not return JSON");
+    }
+
     const data = await response.json();
+    if (data.error) {
+        console.warn("API returned an error, using static fallback:", data.error);
+        return;
+    }
 
     // 1. Load Profile Image
     try {
@@ -159,12 +177,15 @@ async function loadContent() {
         }
     } catch (e) { console.error("Error loading achievements:", e); }
 
+    // Refresh observers for newly added dynamic elements
     initObservers();
 
   } catch (error) {
-    console.error('Critical error loading content:', error);
+    console.error('Error loading dynamic content:', error);
+    // Even if fetch fails, the static content is already visible due to step 0
   }
 }
+
 
 function initObservers() {
     // ===== Scroll Animations =====
