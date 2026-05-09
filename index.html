@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <!-- Three.js for 3D elements -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
 </head>
 <body>
     <!-- Cursor Glow -->
@@ -43,8 +45,13 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
+        <div class="hero-3d-container" id="hero3d"></div>
         <div class="hero-bg-particles" id="particles"></div>
         <div class="hero-content">
+            <div class="hero-badge animate-on-scroll">
+                <span class="badge-dot"></span>
+                <span>Available for New Projects</span>
+            </div>
             <p class="hero-greeting animate-on-scroll">Hello, I'm</p>
             <h1 class="hero-name animate-on-scroll">
                 <span class="name-text">Dharun N</span>
