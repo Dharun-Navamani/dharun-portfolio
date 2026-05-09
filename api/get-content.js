@@ -1,4 +1,4 @@
-const clientPromise = require('./lib/mongodb');
+const getClientPromise = require('./lib/mongodb');
 const fs = require('fs');
 const path = require('path');
 
@@ -6,13 +6,13 @@ module.exports = async (req, res) => {
   try {
     // 1. Try to get data from MongoDB
     try {
-      // Add a timeout for the database connection
       const client = await Promise.race([
-        clientPromise,
+        getClientPromise(),
         new Promise((_, reject) => setTimeout(() => reject(new Error('DB Timeout')), 5000))
       ]);
       
-      const db = client.db('dharun-portfolio');
+      if (client) {
+        const db = client.db('dharun-portfolio');
       const collection = db.collection('content');
       
       const dbData = await collection.findOne({ type: 'master' });
@@ -20,6 +20,7 @@ module.exports = async (req, res) => {
       if (dbData) {
         const { _id, type, ...content } = dbData;
         return res.status(200).json(content);
+      }
       }
     } catch (dbError) {
       console.warn("Database connection failed or timed out, falling back to JSON:", dbError.message);
