@@ -26,21 +26,20 @@ module.exports = async (req, res) => {
     }
 
     // 2. Fallback to local JSON file
-    // In Vercel, files in the same directory as the API function are always included
-    const dataPath = path.join(__dirname, 'content.json');
-    
-    if (fs.existsSync(dataPath)) {
-      const jsonData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+    try {
+      // Using require() is the most reliable way to include JSON files in Vercel bundles
+      const jsonData = require('./content.json');
       return res.status(200).json(jsonData);
-    } else {
-      // Last resort: try the old path
-      const oldPath = path.join(__dirname, '..', 'data', 'content.json');
-      if (fs.existsSync(oldPath)) {
-        const jsonData = JSON.parse(fs.readFileSync(oldPath, 'utf8'));
+    } catch (requireError) {
+      console.warn("require('./content.json') failed, trying fs fallback:", requireError.message);
+      
+      const dataPath = path.join(__dirname, 'content.json');
+      if (fs.existsSync(dataPath)) {
+        const jsonData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
         return res.status(200).json(jsonData);
       }
-      console.error("Fallback JSON file not found at:", dataPath);
-      return res.status(500).json({ error: "Content file not found" });
+      
+      return res.status(500).json({ error: "Content file not found", details: requireError.message });
     }
 
   } catch (error) {

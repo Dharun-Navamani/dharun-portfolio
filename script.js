@@ -189,7 +189,7 @@ async function loadContent() {
 
 function initObservers() {
     // ===== Scroll Animations =====
-    const animateEls = document.querySelectorAll('.animate-on-scroll');
+    const animateEls = document.querySelectorAll('.animate-on-scroll:not(.observed)');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
@@ -199,10 +199,13 @@ function initObservers() {
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     
-    animateEls.forEach(el => observer.observe(el));
+    animateEls.forEach(el => {
+        el.classList.add('observed');
+        observer.observe(el);
+    });
     
     // ===== Skill Bar Animation =====
-    const skillFills = document.querySelectorAll('.skill-fill');
+    const skillFills = document.querySelectorAll('.skill-fill:not(.observed)');
     const skillObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
