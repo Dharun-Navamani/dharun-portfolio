@@ -65,6 +65,17 @@
         "Cloud"
       ],
       "link": "#"
+    },
+    {
+      "title": "Personal Portfolio Website",
+      "description": "A modern, responsive portfolio website with 3D animations, glassmorphism design, and dynamic content loading from MongoDB.",
+      "tags": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Three.js"
+      ],
+      "link": "https://dharun-portfolio-lilac.vercel.app/"
     }
   ],
   "skills": [
@@ -94,7 +105,7 @@
       "level": 85
     },
     {
-      "name": "Java (Basic)",
+      "name": "Java",
       "icon": "fab fa-java",
       "level": 60
     },
