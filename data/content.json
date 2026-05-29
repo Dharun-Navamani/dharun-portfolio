@@ -1,6 +1,6 @@
 {
-  "profile_image": "",
-  "resume_url": "",
+  "profile_image": "assets/profile.jpg",
+  "resume_url": "assets/resume.pdf",
   "contact": {
     "email": "ndharun55@gmail.com",
     "whatsapp": "919994593003",
@@ -24,7 +24,8 @@
         "Sensors",
         "Arduino"
       ],
-      "link": "#"
+      "link": "#",
+      "image": "assets/project1.jpg"
     },
     {
       "title": "Smart Accident Notification",
@@ -34,7 +35,8 @@
         "GPS",
         "Sensors"
       ],
-      "link": "#"
+      "link": "#",
+      "image": "assets/project2.jpg"
     },
     {
       "title": "Wireless Water Bottle",
@@ -44,7 +46,8 @@
         "Wireless",
         "Health"
       ],
-      "link": "#"
+      "link": "#",
+      "image": "assets/project3.jpg"
     },
     {
       "title": "Smart Security System",
@@ -54,7 +57,8 @@
         "Security",
         "Cloud"
       ],
-      "link": "#"
+      "link": "#",
+      "image": "assets/project4.jpg"
     },
     {
       "title": "Irrigation Water Quality Monitor",
@@ -64,7 +68,8 @@
         "TDS Sensor",
         "Cloud"
       ],
-      "link": "#"
+      "link": "#",
+      "image": "assets/project5.jpg"
     },
     {
       "title": "Personal Portfolio Website",
@@ -75,7 +80,8 @@
         "JavaScript",
         "Three.js"
       ],
-      "link": "https://dharun-portfolio-lilac.vercel.app/"
+      "link": "https://dharun-portfolio-lilac.vercel.app/",
+      "image": "assets/project6.jpg"
     }
   ],
   "skills": [
@@ -134,12 +140,14 @@
     {
       "title": "3rd Place – National Level Symposium",
       "text": "Secured 3rd place in Paper Presentation at a National Level Symposium, competing against top engineering students.",
-      "badge": "🥉"
+      "badge": "🥉",
+      "image": "assets/cert1.jpg"
     },
     {
       "title": "2nd Place – Googler Event",
       "text": "Achieved 2nd place at the Googler Event, demonstrating strong technical and analytical skills.",
-      "badge": "🥈"
+      "badge": "🥈",
+      "image": "assets/cert2.jpg"
     }
   ]
 }
